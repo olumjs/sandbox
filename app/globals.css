@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-jakarta);
+  --font-mono: var(--font-jetbrains);
+}
+
+/* ─── Dark mode (default) ──────────────────────────────── */
+:root {
+  /* Dark by default, independent of the OS preference. Declaring color-scheme
+     makes the browser paint its native canvas, scrollbars, and form controls
+     dark from the very first frame — killing the white flash on reload. */
+  color-scheme: dark;
+
+  --bg:               #09090b;
+  --card:             #111113;
+  --surface:          #18181b;
+  --surface-2:        #1e1e20;
+  --hover-overlay:    rgba(255,255,255,0.05);
+
+  --fg:               #fafafa;
+  --fg-2:             #a1a1aa;
+  --fg-muted:         #71717a;
+  --fg-subtle:        #52525b;
+
+  --border:           #27272a;
+  --border-hover:     #3f3f46;
+
+  --accent:           #25C97E;
+}
+
+/* ─── Light mode ───────────────────────────────────────── */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg:               #ffffff;
+  --card:             #ffffff;
+  --surface:          #f4f4f5;
+  --surface-2:        #e4e4e7;
+  --hover-overlay:    rgba(0,0,0,0.04);
+
+  --fg:               #0a0a0a;
+  --fg-2:             #52525b;
+  --fg-muted:         #71717a;
+  --fg-subtle:        #a1a1aa;
+
+  --border:           #e4e4e7;
+  --border-hover:     #d4d4d8;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  transition: background-color 0.25s ease, color 0.2s ease;
+}
+
+/* ─── Animations ───────────────────────────────────────── */
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-slide-down { animation: slide-down 0.2s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+/* ─── Scrollbar ────────────────────────────────────────── */
+::-webkit-scrollbar         { width: 6px; height: 6px; }
+::-webkit-scrollbar-track   { background: var(--bg); }
+::-webkit-scrollbar-thumb   { background: var(--border-hover); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fg-subtle); }
+
+/* ─── Selection ────────────────────────────────────────── */
+::selection { background: rgba(37,201,126,0.25); color: var(--fg); }
+
+/* ─── Transition for theme switch ──────────────────────── */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
