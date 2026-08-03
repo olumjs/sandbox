@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   async headers() {
     // The StackBlitz embed is a WebContainers project, which relies on
     // SharedArrayBuffer and therefore requires the embedding page to be
-    // cross-origin isolated. The playground is the whole site, so apply the
+    // cross-origin isolated. The sandbox is the whole site, so apply the
     // headers everywhere. COEP `credentialless` lets the cross-origin
     // StackBlitz iframe load without needing CORP opt-in.
     const isolation = [

@@ -15,7 +15,7 @@ const STARTER_REPO_SLUG = "olumjs/olum-starter/tree/code";
 /** Tab the editor opens on — the starter's entry component. */
 const ENTRY_FILE = "src/page.html";
 
-export default function Playground() {
+export default function Sandbox() {
   const hostRef = useRef<HTMLDivElement>(null);
   const vmRef = useRef<VM | null>(null);
   const { theme } = useTheme(); // site theme, drives the embed theme
@@ -61,7 +61,7 @@ export default function Playground() {
         openFile: ENTRY_FILE,
         view: "default",
         theme: embedTheme,
-        hideNavigation: true,
+        hideNavigation: false,
         // The file explorer is how you reach the rest of the starter, so keep it.
         hideExplorer: false,
         hideDevTools: true,
@@ -102,7 +102,7 @@ export default function Playground() {
             className="text-sm font-bold text-[var(--fg)]"
             style={{ fontFamily: "var(--font-syne)" }}
           >
-            Playground
+            Sandbox
           </span>
           <span className="hidden sm:inline truncate font-mono text-xs text-[var(--fg-subtle)]">
             olumjs/olum-starter
@@ -128,7 +128,7 @@ export default function Playground() {
         {!ready && (
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[var(--bg)]">
             <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--border)] border-t-[#25C97E]" />
-            <p className="text-xs font-mono text-[var(--fg-subtle)]">Booting the playground…</p>
+            <p className="text-xs font-mono text-[var(--fg-subtle)]">Booting the sandbox…</p>
           </div>
         )}
         <div

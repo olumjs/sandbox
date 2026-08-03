@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Playground from "@/components/Playground";
+import Sandbox from "@/components/Sandbox";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -13,6 +13,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PlaygroundPage() {
-  return <Playground />;
+export default function SandboxPage() {
+  return <Sandbox />;
 }
