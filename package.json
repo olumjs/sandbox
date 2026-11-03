@@ -1,27 +1,34 @@
 {
-  "name": "olum",
+  "name": "sandbox",
+  "description": "Olum App",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "dev": "npm run css && concurrently -k -n css,app -c magenta,green \"npm run css:watch\" \"npm run dev:app\"",
+    "build": "olum-compiler build",
+    "start": "olum-compiler start",
+    "css": "tailwindcss -i src/main.css -o public/main.css",
+    "css:watch": "npm run css -- --watch",
+    "dev:app": "olum-compiler dev"
   },
+  "olum": {
+    "SITE_URL": "https://www.olumjs.top",
+    "SSG_DELAY": 0
+  },
+  "keywords": [
+    "olum"
+  ],
+  "author": "Eissa Saber",
+  "license": "ISC",
   "dependencies": {
-    "@stackblitz/sdk": "^1.11.1",
-    "next": "16.2.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "olum": "^0.12.3",
+    "olum-router": "^0.6.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.6",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@tailwindcss/cli": "^4.3.4",
+    "concurrently": "^10.0.6",
+    "olum-compiler": "^2.1.3",
+    "olum-devtool": "^1.0.5",
+    "tailwindcss": "^4.3.4"
   }
 }
