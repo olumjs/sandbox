@@ -1,49 +1,11 @@
-# sandbox
+<p align="center"><img width="100" src="https://github.com/olumjs.png" alt="Olum logo"></p>
+<p align="center">
+ <a href="https://www.npmjs.com/package/olum" target="_blank"><img src="https://img.shields.io/npm/v/olum" alt="npm"></a>
+ <img src="https://img.shields.io/npm/dm/olum" alt="npm">
+ <img src="https://img.shields.io/npm/l/olum" alt="npm">
+</p>
 
-A web application built with [Olum.js](https://olumjs.top/), a minimal JavaScript framework for building reactive single-page applications with HTML, CSS, and JavaScript.
+# Olumjs
+The VanillaJS developer’s platform.
 
-## Getting Started
-
-### Installation
-
-Install the project dependencies:
-
-```bash
-npm install
-```
-
-### Development
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-The application will be available at the local URL shown in your terminal.
-
-### Production Build
-
-Create an optimized production build:
-
-```bash
-npm run build
-```
-
-## Learn Olum.js
-
-If you're new to Olum.js, check out the documentation:
-
-**[Olum.js Documentation →](https://olumjs.top/docs)**
-
-You can also experiment with Olum directly in the browser:
-
-**[Olum.js Playground →](https://olumjs.top/playground)**
-
-## About Olum.js
-
-Olum.js is designed to let you build reactive web applications using familiar HTML, CSS, and JavaScript without requiring a complex toolchain.
-
-If you know HTML, you already know most of what you need to get started with Olum.js.
-
-**[Visit Olum.js →](https://olumjs.top/)**
+See [Documentation](https://olum.eissawebdev.top/docs)

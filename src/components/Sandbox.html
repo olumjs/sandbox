@@ -1,0 +1,93 @@
+<script>
+  import { onMount } from "olum";
+  import sdk from "@stackblitz/sdk";
+  import ThemeToggle from "./ThemeToggle";
+  import Loader from "./Loader";
+  import { sandbox, attachVm } from "../utils/sandbox";
+  import { siteConfig } from "../utils/site-config";
+
+  // The GitHub repo StackBlitz clones and runs live, as owner/repo/tree/branch
+  // (github.com/olumjs/olum-starter/tree/code). Not a StackBlitz-hosted project;
+  // the embed clones this repo into WebContainers.
+  const STARTER_REPO_SLUG = "olumjs/olum-starter/tree/code";
+
+  /** Tab the editor opens on — the starter's entry component. */
+  const ENTRY_FILE = "src/page.html";
+
+  // This template reads no state/store on purpose: the SDK puts an iframe inside
+  // `.embed-host` that the template doesn't know about, and a re-render would
+  // patch it away. Reactive bits live in ThemeToggle and Loader instead.
+  // WebContainers needs the page to be cross-origin isolated. That is handled
+  // before the app boots: host headers (vercel.json / public/_headers) or, where
+  // a host can't send them, the service worker registered in public/index.html.
+  onMount(() => {
+    const embedHost = host.querySelector(".embed-host");
+    if (!embedHost) return;
+
+    let cancelled = false;
+    // The SDK replaces the element it's given with the iframe, so embed into a
+    // throwaway child of the stable host.
+    const target = document.createElement("div");
+    embedHost.replaceChildren(target);
+
+    sdk
+      .embedGithubProject(target, STARTER_REPO_SLUG, {
+        forceEmbedLayout: true,
+        openFile: ENTRY_FILE,
+        view: "default",
+        theme: sandbox.theme,
+        hideNavigation: false,
+        // The file explorer is how you reach the rest of the starter, so keep it.
+        hideExplorer: false,
+        hideDevTools: true,
+        terminalHeight: 0, // minimize the terminal
+        height: "100%",
+        crossOriginIsolated: true,
+      })
+      .then((vm) => {
+        if (cancelled) return;
+        attachVm(vm);
+        sandbox.ready = true;
+      })
+      .catch(() => {
+        if (!cancelled) sandbox.ready = true;
+      });
+
+    return () => {
+      cancelled = true;
+      attachVm(null);
+      sandbox.ready = false;
+      embedHost.replaceChildren();
+    };
+  });
+</script>
+
+<div class="flex h-screen flex-col bg-[var(--bg)]">
+  <!-- Branded toolbar -->
+  <div class="flex h-11 shrink-0 items-center justify-between gap-4 border-b border-[var(--border)] bg-[var(--card)] px-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <span class="flex h-1.5 w-1.5 shrink-0 rounded-full bg-[#25C97E] shadow-[0_0_8px_rgba(37,201,126,0.7)]"></span>
+      <span class="text-sm font-bold text-[var(--fg)]" style="font-family: var(--font-syne)">Sandbox</span>
+      <span class="hidden sm:inline truncate font-mono text-xs text-[var(--fg-subtle)]">olumjs/olum-starter</span>
+    </div>
+
+    <div class="flex items-center gap-2 shrink-0">
+      <ThemeToggle />
+      <a
+        href="{siteConfig.github}"
+        class="flex items-center gap-1.5 rounded-lg border border-[rgba(37,201,126,0.2)] bg-[rgba(37,201,126,0.08)] px-3 py-1.5 text-xs font-mono font-semibold text-[#25C97E] transition-colors hover:bg-[rgba(37,201,126,0.14)]"
+      >
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
+        </svg>
+        Star on GitHub
+      </a>
+    </div>
+  </div>
+
+  <!-- Editor + preview -->
+  <div class="relative min-h-0 flex-1">
+    <Loader />
+    <div class="embed-host h-full w-full"></div>
+  </div>
+</div>

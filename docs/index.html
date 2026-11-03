@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" data-olum data-theme="dark">
+  <head>
+    <title>OlumJS Sandbox</title>
+    <meta charset="UTF-8" />
+    <meta name="generator" content="OlumJS">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Try OlumJS in your browser — an interactive sandbox where you can edit components and see them run live, no install required." />
+    <meta name="theme-color" content="#09090b" />
+    <!-- Runs synchronously before first paint: dark is the default, and we only
+         switch to light when the user has explicitly chosen it. The OS preference
+         is never consulted, so there is no theme flash on reload. -->
+    <script>try{var t=localStorage.getItem('olum-theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
+    <!-- Cross-origin isolation for the StackBlitz preview (see /coi-sw.js). If the
+         host didn't send COOP/COEP, register the worker and reload once so this
+         page is served through it. The sessionStorage guard prevents a reload loop. -->
+    <script>(function(){var K="coi-sw-reload";try{if(window.crossOriginIsolated){sessionStorage.removeItem(K);return}if(!window.isSecureContext||!("serviceWorker" in navigator))return;navigator.serviceWorker.register("/coi-sw.js").then(function(){return navigator.serviceWorker.ready}).then(function(){if(!window.crossOriginIsolated&&!sessionStorage.getItem(K)){sessionStorage.setItem(K,"1");location.reload()}}).catch(function(e){console.warn("coi-sw:",e)})}catch(e){}})();</script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..900&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="/assets/index-Cbon4Cz4.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DLoyOWyG.css">
+  </head>
+  <body>
+<div id="olum-app"></div>
+</body>
+</html>

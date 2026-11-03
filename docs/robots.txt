@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://code.olumjs.top
+Sitemap: https://code.olumjs.top/sitemap.xml

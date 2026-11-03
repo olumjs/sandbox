@@ -5,14 +5,14 @@
   "private": true,
   "scripts": {
     "dev": "npm run css && concurrently -k -n css,app -c magenta,green \"npm run css:watch\" \"npm run dev:app\"",
-    "build": "olum-compiler build",
+    "build": "rm -rf ./docs && olum-compiler build && mv ./dist ./docs && echo code.olumjs.top > ./docs/CNAME",
     "start": "olum-compiler start",
     "css": "tailwindcss -i src/main.css -o public/main.css",
     "css:watch": "npm run css -- --watch",
     "dev:app": "olum-compiler dev"
   },
   "olum": {
-    "SITE_URL": "https://www.olumjs.top",
+    "SITE_URL": "https://olumjs.top",
     "SSG_DELAY": 0
   },
   "keywords": [
@@ -21,14 +21,17 @@
   "author": "Eissa Saber",
   "license": "ISC",
   "dependencies": {
+    "@stackblitz/sdk": "^1.11.1",
     "olum": "^0.12.3",
-    "olum-router": "^0.6.1"
+    "olum-router": "^0.6.1",
+    "olum-store": "^0.1.0"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.4",
     "concurrently": "^10.0.6",
     "olum-compiler": "^2.1.3",
     "olum-devtool": "^1.0.5",
-    "tailwindcss": "^4.3.4"
+    "tailwindcss": "^4.3.4",
+    "vite": "^8.3.5"
   }
 }

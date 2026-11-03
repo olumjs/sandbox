@@ -1,0 +1,10 @@
+<script>
+  import { sandbox } from "../utils/sandbox";
+</script>
+
+<if when="!sandbox.ready">
+  <div class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[var(--bg)]">
+    <div class="h-8 w-8 animate-spin rounded-full border-2 border-[var(--border)] border-t-[#25C97E]"></div>
+    <p class="text-xs font-mono text-[var(--fg-subtle)]">Booting the sandbox…</p>
+  </div>
+</if>
